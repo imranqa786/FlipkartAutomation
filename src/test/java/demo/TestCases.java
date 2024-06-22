@@ -10,6 +10,7 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -110,12 +111,9 @@ public class TestCases {
         Thread.sleep(5000);
         // driver.findElement(By.xpath("//span[@role='button']")).click();
        WebElement searchBox = driver.findElement(By.xpath("//input[contains(@title,'Search for Products')]"));
-       Wrappers.sendKeys(searchBox, "iphone");
-          WebElement searchhAppleVerification = driver.findElement(By.xpath("//input[contains(@title,'Search')]"));
-       String applVerification = searchhAppleVerification.getAttribute("value");
-       if (applVerification.equals("iphone")) {
-        System.out.println("Verified iphone is Entered in");
-       }
+       Wrappers.sendKeys(searchBox, "iPhone");
+          String enteredText = searchBox.getAttribute("value");
+          Assert.assertEquals(enteredText, "iPhone", "The text 'iPhone' was not entered correctly in the search box.");
 
        WebElement searchClick = driver.findElement(By.xpath("//button[contains(@aria-label,'Search')]"));
        Wrappers.click(searchClick);
